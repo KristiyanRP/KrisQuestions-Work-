@@ -18,7 +18,10 @@ for the team to fill in.
 1. In Outlook, open **Groups → Property Introductions** and choose **Follow in
    inbox**. The Microsoft 365 connector can't open the group mailbox itself; it
    sees group posts through your inbox copy.
-2. Make sure the **Microsoft 365** and **Carta** connectors are connected in claude.ai.
+2. Make sure the **Microsoft 365** and **Carta** connectors are connected in claude.ai,
+   with Carta signed in as **kris@hay-wain.com**. New deals are created under the
+   connected Carta account with Kris as Deal Lead, and the skill refuses to create
+   deals if Carta is connected as anyone else.
 
 ### Running it
 - On demand: in a Claude Code session on this repo, say "log new property intros"

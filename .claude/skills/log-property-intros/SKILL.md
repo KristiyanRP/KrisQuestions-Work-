@@ -47,8 +47,14 @@ Defaults: look back **14 days**. If the user gives a date ("since 1 August",
 
 1. Carta requires `welcome` → `get_current_user` → `read_resource
    carta://business-glossary` before other calls (the server enforces this order).
-   Note which Carta user is connected: new deals are created under that user.
-2. Call `crm:get_deal_fields` once (via `crm_read_tool`) and confirm the field IDs
+2. **Check who Carta is connected as.** Deals are owned by Kris Parashkevov
+   (`kris@hay-wain.com`), and Carta records the connected account as each deal's
+   creator. If `get_current_user` returns any other email, don't create anything:
+   switch to dry-run behaviour and put this at the top of the report: "Carta is
+   connected as <email>, not kris@hay-wain.com. Reconnect the Carta connector as
+   Kris." A deal created under the wrong account can't have its creator changed
+   afterwards.
+3. Call `crm:get_deal_fields` once (via `crm_read_tool`) and confirm the field IDs
    in the mapping below still exist. If one has been renamed or removed, skip that
    field and mention it in the report rather than failing the run.
 
@@ -130,6 +136,7 @@ Match the conventions of the team's existing Real Estate deals:
 | **Deal Overview** | `comment` | 1-3 plain-English sentences wrapped in `<p>…</p>`: what it is, where, and the headline price/yield. The quick read on the deal card. |
 | Added date | `addedAt` | The email's `receivedDateTime` date (ISO), i.e. when the intro reached the team. |
 | Pipeline / stage | `pipelineId`, `stageId` | `hay_wain_primary`, `hwg_identified` (Identified). Always. |
+| Deal Lead | `dealLead` | `kris@hay-wain.com`. Always. |
 | Investment Strategy | `fields.HW_investment_strategy` | "Real Estate" |
 | Deal Type | `fields.HWRE_deal_type` | "Equity" (acquisition / JV equity, the usual case), "Debt" (loan or lending request), "Hybrid Capital" (pref equity, mezz). |
 | Introduction Type | `fields.HW_introduction_type` | "On Market": agent-run sale (brochure, "instructed to seek offers", "launched"). "Off-Market": shared privately or exclusively before or instead of marketing. "Direct": straight from an owner, vendor, sponsor or developer with no agent process. Omit if unclear. |
@@ -145,8 +152,8 @@ Match the conventions of the team's existing Real Estate deals:
 | Expected Hold Period | `fields.HWRE_expected_hold_period` | Text, e.g. "5 years", if stated. |
 | Advisers Company | `fields.hwg_advisers_company` | `["<agent firm's web domain>"]` from the introducing agent's email address (e.g. `["logixproperty.com"]`). Skip personal domains (gmail etc.) and hay-wain.com. |
 
-Do not send `hwg_next_steps`, `HWRE_reasons_for_discount`, `dealLead` (it defaults
-to the connected user), `tags`, or any `HW_PE_*` / private-equity field.
+Do not send `hwg_next_steps`, `HWRE_reasons_for_discount`, `tags`, or any
+`HW_PE_*` / private-equity field.
 
 Shape of the call (`crm_call_tool`, with a one-line `summary` naming the property):
 
@@ -157,6 +164,7 @@ Shape of the call (`crm_call_tool`, with a one-line `summary` naming the propert
     "pipelineId": "hay_wain_primary",
     "stageId": "hwg_identified",
     "addedAt": "2026-10-02",
+    "dealLead": "kris@hay-wain.com",
     "comment": "<p>…</p>",
     "company": {"name": "…", "industry": "Commercial Real Estate", "location": "…", "description": "…"},
     "fields": {"HW_investment_strategy": "Real Estate", "HWRE_deal_type": "Equity", "…": "…"}
