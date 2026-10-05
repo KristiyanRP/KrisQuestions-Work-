@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Microsoft_365__get_me",
+      "mcp__Microsoft_365__outlook_email_search",
+      "mcp__Microsoft_365__read_resource",
+      "mcp__Carta__welcome",
+      "mcp__Carta__get_current_user",
+      "mcp__Carta__read_resource",
+      "mcp__Carta__crm_search_tools",
+      "mcp__Carta__crm_read_tool"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__Carta__crm_call_tool",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/carta_create_only.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
