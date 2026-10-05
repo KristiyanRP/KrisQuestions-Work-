@@ -135,7 +135,7 @@ Match the conventions of the team's existing Real Estate deals:
 | Description | `company.description` | 60-120 words, metrics-dense, plain text: what and where, size, tenure, tenancy (tenants, rent, £ psf, WAULT to expiry/breaks), quoting price, NIY, £ psf, capex, business plan/upside, and anything notable (e.g. "two prior sale processes collapsed"). |
 | **Deal Overview** | `comment` | 1-3 plain-English sentences wrapped in `<p>…</p>`: what it is, where, and the headline price/yield. The quick read on the deal card. |
 | Added date | `addedAt` | The email's `receivedDateTime` date (ISO), i.e. when the intro reached the team. |
-| Pipeline / stage | `pipelineId`, `stageId` | `hay_wain_primary`, `hwg_identified` (Identified). Always. |
+| Pipeline / stage | *(omit `pipelineId` and `stageId`)* | Leave both out. New deals then land in the Primary pipeline at **Identified**, which is the pipeline's default stage. Sending `stageId: "hwg_identified"` explicitly was rejected by Carta with "bad stage value" even though the ID is valid. After creating, check the response shows `stageId: hwg_identified`; if not, flag it in the report rather than moving it. |
 | Deal Lead | `dealLead` | `kris@hay-wain.com`. Always. |
 | Investment Strategy | `fields.HW_investment_strategy` | "Real Estate" |
 | Deal Type | `fields.HWRE_deal_type` | "Equity" (acquisition / JV equity, the usual case), "Debt" (loan or lending request), "Hybrid Capital" (pref equity, mezz). |
@@ -143,9 +143,9 @@ Match the conventions of the team's existing Real Estate deals:
 | Sector | `fields.HWRE_Sector` | One of: Office, Hotel, Residential, Retail, Industrial, Other, Portfolio, Mixed-Use, PBSA/HMO. Industrial covers logistics, R&D and trade. Several assets = Portfolio. Car parks, self-storage, data centres = Other unless clearly one of the above. |
 | Tenure | `fields.HWRE_Tenure` | Freehold, Leasehold or Long-Leasehold (described as long leasehold / virtual freehold, or roughly 99+ years unexpired). |
 | Purchase/Asking Price | `fields.HWRE_purchaseasking_price` | Whole pounds (13550000). Quoting, guide, "offers in excess of" or agreed price. For a range, use the lower end and mention the range in the description. |
-| Capital Valuation (psf) | `fields.HWRE_capital_valuation` | £ psf as stated, else price ÷ total area, rounded to whole pounds. |
-| Total Area | `fields.HWRE_total_area` | sq ft. NIA if given, else GIA. Convert sq m × 10.764. Rounded. |
-| NIY | `fields.HWRE_NIY` | Percent as a number (5.5 for 5.50%). Only if stated; don't compute. |
+| Capital Valuation (psf) | `fields.HWRE_capital_valuation` | £ psf as stated, else price ÷ total area, rounded to whole pounds. **Must be on the same area basis as Total Area** (below). |
+| Total Area | `fields.HWRE_total_area` | sq ft. Use the area basis the source's £ psf is quoted on, so the two fields agree (price ÷ area ≈ psf). If the source states no psf, use NIA, else GIA. Mention the other measure in the description (e.g. "55,023 sq ft GIA / 43,405 sq ft NIA"). Convert sq m × 10.764. Rounded. |
+| NIY | `fields.HWRE_NIY` | Percent as a number (5.5 for 5.50%). Only a stated **net** initial yield, i.e. one described as "NIY" or "net initial yield", or "after purchaser's costs". A bare "initial yield", "yield on price" or "gross yield" is not an NIY: leave the field blank and put the quoted figure in the description and overview. Never compute it. |
 | CAPEX | `fields.HWRE_capex` | Whole pounds, if stated (all-in figure if both are given). |
 | Equity Requirement | `fields.HWRE_equity_requirement` | Whole pounds, if stated. |
 | Expected Returns | `fields.HWRE_expected_returns` | IRR % as a number, if stated. Prefer levered and say which in the description. |
@@ -161,8 +161,6 @@ Shape of the call (`crm_call_tool`, with a one-line `summary` naming the propert
 {
   "name": "crm:create_deal",
   "arguments": {
-    "pipelineId": "hay_wain_primary",
-    "stageId": "hwg_identified",
     "addedAt": "2026-10-02",
     "dealLead": "kris@hay-wain.com",
     "comment": "<p>…</p>",
