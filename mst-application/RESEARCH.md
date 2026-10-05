@@ -33,3 +33,14 @@ The Cambridge sites (landecon, postgraduate.study, jesus, ice) are blocked from 
 ## Research proposal template: possible mismatch
 - The template supplied (`research-proposal-template.docx`, 500–1,000 words, "evidence for action… frameworks, tools… positive impact", "relevance to the course themes (please see attachment)") matches the **CISL MSt in Sustainability Leadership** template, not a Land Economy one.
 - **Need to confirm** that the MSt Real Estate portal asks for this template, or whether it asks for something else, such as a dissertation topic outline.
+
+## Employer funding: UK tax treatment (to confirm with Hay Wain's tax adviser)
+- Employee: work-related training paid for by the employer is exempt from income tax and NIC (ITEPA 2003 ss.250–260) if the course is relevant to current or likely future duties. An MSt in Real Estate for a real estate investment analyst should qualify.
+- Employer: the cost is normally deductible for corporation tax. A trading company deducts it as a trade expense; an investment or holding company would usually claim it as a management expense. At 25% corporation tax, the net cost is about 75% of the fees.
+- VAT: university fees are exempt, so there is no input VAT to recover either way.
+- If Kristiyan pays the fees himself, there is no personal tax relief. An employer-paid route is tax-efficient for both parties.
+- A clawback or training-agreement clause, with pro-rata repayment if he leaves within X months, is market standard and does not affect the exemption.
+
+## AI research direction: shortlist (from the director's "heterogeneous asset" idea)
+See the chat on 5 October 2026. The strongest supervisor fit at Land Economy is **Prof. Thies Lindenthal** (Grosvenor Professor of Real Estate Finance), who works on machine learning, computer vision and "Testing machine learning systems in real estate" (Wan and Lindenthal, *Real Estate Economics*).
+- The RICS professional standard *Responsible use of AI in surveying practice* took effect on 9 March 2026. It is mandatory where AI materially affects a service, and it requires a named surveyor who takes responsibility for each AI output.
