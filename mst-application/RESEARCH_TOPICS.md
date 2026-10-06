@@ -65,3 +65,18 @@ Option 1, with option 3's measure of how far assumptions spread included as a se
 2. Python, R or statistics skill level?
 3. Could you realistically recruit 40–60 UK investment professionals for a 15-minute online experiment?
 4. Does Hay Wain or Modella already use AI in underwriting or committee papers? Did you lead any of it? (This is also strong material for the personal statement.)
+
+## Kristiyan's answers (6 October 2026)
+1. Data access (CoStar, MSCI and similar): yes, or will have it by the time the course starts.
+2. Python and R: none yet.
+3. Recruiting 40–60 professionals for an experiment: very achievable.
+4. **Hay Wain used no AI before he joined. He led the work that built AI into Hay Wain's processes across several workflows.** (Leadership material for the personal statement.)
+- He likes option 1 but wants it **more technical**, and asked for several variants.
+
+## More technical variants of option 1 (6 October 2026)
+More novelty checks: LLM valuation studies are almost all residential, e.g. "On the performance of LLMs for real estate appraisal" (2025) and "Incorporating LLMs in automated real estate valuation" (*JRER* 2025). One non-UK CRE paper uses features derived from language models (the HSE multimodal model). Shen and Ross (2021, *JUE*) measured the value of soft information in **housing** descriptions. Conformal prediction for AVMs has only been applied to residential (e.g. Hjort et al. 2022; spatially weighted CP 2023; *JREFE* 2024). **Nobody has tested any of these on UK CRE, or as a function of heterogeneity.**
+
+- **1A, mapping the frontier (recommended):** build a heterogeneity index for UK CRE deals. Value a hold-out set of transactions three ways: a gradient-boosted model, an LLM or agent underwriter, and human professionals (the experiment). Estimate how error changes with heterogeneity for each, and find the crossover point where humans add value. The output is a delegation framework for investment committees.
+- **1B, LLM underwriter benchmark:** test frontier LLMs and agents against human underwriting on real anonymised UK deals with known outcomes, stratified by heterogeneity. Measure accuracy, calibration and hallucinated assumptions. Low coding, high novelty.
+- **1C, soft information:** use LLMs to measure the soft information in CRE marketing brochures, IC papers and leases (the Shen and Ross method applied to CRE). Test whether it explains the pricing residual left by hard data, and whether that effect grows with heterogeneity.
+- **1D, calibrated uncertainty in decisions:** add conformal prediction intervals to an ML valuation model for UK CRE. Test experimentally whether showing calibrated uncertainty, rather than a point estimate, reduces anchoring and improves committee decisions, and whether intervals widen with heterogeneity.
